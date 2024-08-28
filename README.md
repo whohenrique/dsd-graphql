@@ -1,50 +1,23 @@
-# React + TypeScript + Vite
+# Rodando a aplicação
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Após clonar o projeto, utilize
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm install
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Então, tente acessar o projeto na URL padrão: http://localhost:5173
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+# Configuração GraphQL
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+O projeto já possui o ApolloClient instalado, sendo necessário apenas alterar a URL base da API GraphQL. Você pode fazer isso no arquivo `/src/lib/apollo.ts`:
+
+```typescript
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+
+export const client = new ApolloClient({
+  uri: "https://flyby-router-demo.herokuapp.com/", // Atualize com a URL da sua API GraphQL
+  cache: new InMemoryCache(),
+});
 ```
